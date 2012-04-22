@@ -17,3 +17,8 @@ Allow for multiple texture maps.
 Prevent the user from moving the grid off the screen.
 Virtualize the map to allow for bigger maps.
 Allow it to switch to quads when the map gets too small.
+LICENSING
+MS-PL. If you feel that's too restrictive, send me an email.
+It works on my computer, but I don't make any guarantees.
+If you use parts, I'd appreciate mention, or at least a friendly email ;)
+ 
