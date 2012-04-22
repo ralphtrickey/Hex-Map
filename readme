@@ -1,0 +1,19 @@
+Version 0.5 pre-Alpha
+It will deploye to an iPad and you can move/pinch/zoom/rotate.
+I couldn't find anything on the web that demonstrates these techniques.
+This is basic code to display a 3D hex grid with textures based on triangle strips.
+  It goes up to 50x50 loading them into the GPU.
+Includes code to convert from world to screen and screen to world coordinates.
+Includes code to do basic gesture recognition (move/pinch/rotate)
+I've tested it on an iPad 1, and it seems to work fine.
+Marmalade is a commercial cross-platform SDK (www.madewithmarmalade.com)
+TODO:
+Abstract out the hex contents into a separate class.
+  Right now, it just does a fixed terrain.
+Abstract out basic counters into a separate class.
+  That way I can test out various control schemes to see what works.
+Allow for multiple texture maps.
+  This would allow for overlays for roads, etc.
+Prevent the user from moving the grid off the screen.
+Virtualize the map to allow for bigger maps.
+Allow it to switch to quads when the map gets too small.
