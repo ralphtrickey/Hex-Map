@@ -8,6 +8,7 @@ Includes code to do basic gesture recognition (move/pinch/rotate)
 I've tested it on an iPad 1, and it seems to work fine.
 Marmalade is a commercial cross-platform SDK (www.madewithmarmalade.com)
 TODO:
+Fix Zoom and Rotate to work around the center of the fingers instead of the center of the screen.
 Abstract out the hex contents into a separate class.
   Right now, it just does a fixed terrain.
 Abstract out basic counters into a separate class.

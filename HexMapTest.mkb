@@ -1,0 +1,37 @@
+#!/usr/bin/env mkb
+files
+{
+	(source)
+	CInput.cpp
+	CInput.h
+	HexMapTest.h
+	HexMapTest.cpp
+	HexGrid.cpp
+	HexGrid.h
+}
+
+subprojects
+{
+	iwgx
+	../ExamplesCore
+}
+
+assets
+{
+	(data-ram/data-gles1, data)
+	TileRes.group.bin
+}
+
+#### AUTO GENERATED deployment settings from DeployTool.exe. Do not edit below this line ####
+deployments
+{
+	["Default"]
+	caption='HexMap'
+	copyright='Copyright Ralph Trickey 2012'
+	name='HexMap'
+	provider='Ralph Trickey'
+	version-major=0
+	version-minor=6
+	version-revision=0
+	version-string='0.6.0'
+}
