@@ -10,7 +10,6 @@ private:
     // Initialise view matrix
     CIwMat s_viewMatrix, s_ModelMatrix;
     CIwMat s_viewMatrix_initial, s_ModelMatrix_initial;
-    CIwTexture *s_BitMapTexture;
 	CIwResGroup *pGroup;
 	class HexGrid *hexGrid;
 	bool zooming, rotating;
