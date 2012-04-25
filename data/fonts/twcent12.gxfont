@@ -1,0 +1,14 @@
+//Temp file created by AS Font Builder (User: Krosk At: 05/24/11 10:23:24)
+//Command Line:
+//:  -fontdesc "0;-16;0;0;0;700;0;0;0;0;3;2;1;34;Tw Cen MT" 3 0 0  -pad 0 0 
+//:  -col #FFFFFF -shadow 1 -spacing 5 -force16 2
+
+CIwGxFont
+{
+	utf8 1
+	image twcent12.tga
+	charmap " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~ ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ"
+
+	optim1555 1
+	leading 4
+}

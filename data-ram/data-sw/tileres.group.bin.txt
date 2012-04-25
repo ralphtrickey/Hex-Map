@@ -1,0 +1,8 @@
+ResGroupResources:
+	CIwTexture (0x3521f539)
+		"grid" (0x7c977d6b)
+		Size: 32800
+	ResList 'CIwTexture' pos:38 size:32810
+
+ResGroupResources: Wrote 32814 bytes to CIwResGroup "TileRes"
+

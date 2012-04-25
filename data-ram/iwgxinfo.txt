@@ -1,0 +1,63 @@
+//-------------------------------------------------------------------------------------------
+// IwGx metrics
+//-------------------------------------------------------------------------------------------
+Data Cache Bytes:         -11543
+Vert Cache Entries:       2404
+Verts Transformed:        2412
+Verts Translated:         0
+Polys Clipped:            0
+Polys Culled:             0
+Polys Degenerate:         0
+Lines Clipped:            0
+Lines Degenerate:         0
+Cols Calculated:          0
+Cols Calculated (Diffuse): 0
+Cols Calculated (Specular): 0
+Cols Calculated (Emissive): 0
+Cols Calculated (Ambient): 0
+Cols Calculated (Fogged): 0
+Cols Calculated (Slow path): 0
+Polys Processed:          2
+Polys Rendered:           2
+Lines Processed:          0
+Lines Rendered:           0
+Sprites Processed:        0
+Sprites Rendered:         0
+TriLists Procsd:          1
+TriStrips Procsd:         0
+TriFans Procsd:           0
+QuadLists Procsd:         0
+QuadStrips Procsd:        0
+LineLists Procsd:         0
+LineStrips Procsd:        0
+SpriteLists Procsd:       0
+Poly Buffer Bytes:        0
+Max OT Slot:              0
+Max OT VZ:                0
+Pixel Overdraw:           0
+Opaque Mats In Scene:     0
+Alpha Mats In Scene:      1
+Opaque Geoms In Scene:    0
+Alpha Tested Geoms in Scene: 0
+Alpha Geoms In Scene:     1
+Total geoms rendered:     0
+TriLists To HW:           0
+TriStrips To HW:          0
+TriFans To HW:            0
+QuadLists To HW:          0
+QuadStrips To HW:         0
+LineLists To HW:          0
+LineStrips To HW:         0
+SpriteLists To HW:        0
+Total Inds To HW:         0
+Max Inds To HW:           0
+Vertex attribs in VBOs:   0
+Vertex attribs (dynamic): 0
+Draw calls using index VBOs: 0
+Draw calls using dynamic inds: 0
+Draw calls clipped or culled: 0
+
+
+//-------------------------------------------------------------------------------------------
+// IwGx cached geometry info
+//-------------------------------------------------------------------------------------------

@@ -82,6 +82,16 @@ void HexMapTest::Init()
     // Set near and far planes
     IwGxSetFarZNearZ(0x1000, 0x10);
 
+    // Create empty texture object
+    s_BitMapTexture = new CIwTexture;
+
+    // Load image data from disk into texture
+    s_BitMapTexture->LoadFromFile("./textures/testTexture_8bit.bmp");
+
+    // "Upload" texture to VRAM
+    s_BitMapTexture->Upload();
+
+
     // Set the view matrix along the -ve z axis
     CIwMat view = CIwMat::g_Identity;
     view.t.z = -0x100;
@@ -98,6 +108,9 @@ void ExampleShutDown() {
 }
 //-----------------------------------------------------------------------------
 void HexMapTest::ShutDown() {
+    // Destroy texture
+    delete s_BitMapTexture;
+
 	// Terminate
 	delete hexGrid;
 	IwGetResManager()->DestroyGroup(pGroup);
