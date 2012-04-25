@@ -31,7 +31,7 @@ private:
 	void DebugPrint(int closestX, int closestY);
 	void SetTranslation();
 	void SetRotation(float deltaRotation);
-	void SetZoom(float deltaZoom);
+	void SetZoom(float deltaZoom, int multiplier);
 	void SetModelMatrix();
 public:
 	void Init(void);

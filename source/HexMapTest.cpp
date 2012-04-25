@@ -238,16 +238,16 @@ bool HexMapTest::UpdateKey() {
     }
 	return true;
 }
-void HexMapTest::SetZoom(float deltaZoom)
+void HexMapTest::SetZoom(float deltaZoom, int multiplier)
 {
 	if (deltaZoom >= 1)
-		deltaZoom = (deltaZoom-1)*8+1;
+		deltaZoom = (deltaZoom-1)*multiplier+1;
 	else
 		deltaZoom = (deltaZoom-1)+1;
-	if (deltaZoom > 8.0f)
-		deltaZoom = 8.0f;
-	if (deltaZoom < 1.0f/8)
-		deltaZoom = 1.0f/8;
+	if (multiplier != 1 && deltaZoom > float(multiplier))
+		deltaZoom = float(multiplier);
+	if (multiplier != 1 && deltaZoom < 1.0f/multiplier)
+		deltaZoom = 1.0f/multiplier;
 	zoom = zoom_initial * deltaZoom;
 	SetModelMatrix();
 }
@@ -362,7 +362,7 @@ bool HexMapTest::Update()
 							int16 dsprite1_pos_x, dsprite1_pos_y;
 							if (g_Input.finger1MovementDelta(dsprite1_pos_x, dsprite1_pos_y)) {
 								float deltaZoom = 1.0f - 1.0f*(dsprite1_pos_y)/IwGxGetScreenHeight();
-								SetZoom(deltaZoom);
+								SetZoom(deltaZoom, 8);
 							}
 						}
 					} else if (rotating) {
@@ -390,8 +390,8 @@ bool HexMapTest::Update()
 							int d12y_initial=sprite1_pos_y_initial-sprite2_pos_y_initial;
 							int Delta_initial = d12x_initial*d12x_initial+d12y_initial*d12y_initial;
 							int Delta = d12x*d12x+d12y*d12y;
-							float newZoom = float(sqrt(1.0*Delta/Delta_initial));
-							SetZoom(newZoom);
+							float newZoom = float(sqrt(1.0*Delta)/sqrt(Delta_initial));
+							SetZoom(newZoom, 1);
 							float oldRotation = float(atan2(float(d12y_initial), float(d12x_initial)));
 							float newRotation = float(atan2(float(d12y), float(d12x)));
 							SetRotation(180.0f*(oldRotation-newRotation)/PI);
