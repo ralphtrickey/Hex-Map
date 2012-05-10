@@ -16,8 +16,8 @@ private:
 	bool zooming, rotating;
 	float zoom, rotation;
 	float zoom_initial, rotation_initial;
-	int16 translationX, translationY;
-	int16 translationX_initial, translationY_initial;
+	int16 screenTranslationX, screenTranslationY;
+	int16 screenTranslationX_initial, screenTranslationY_initial;
 	CIwVec3 world_initial;
 
 	static bool KeyPressed(s3eKey key);

@@ -28,6 +28,7 @@ deployments
 	["Default"]
 	caption='HexMap'
 	copyright='Copyright Ralph Trickey 2012'
+	iphone-appid='com.trickeysoft.hextest'
 	name='HexMap'
 	provider='Ralph Trickey'
 	version-major=0

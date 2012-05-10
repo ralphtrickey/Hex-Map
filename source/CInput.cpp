@@ -195,37 +195,53 @@ void CInput::Update()
 		s3ePointerUpdate();
 }
 
-CInput2::CInput2() : finger1WasDown(false), finger1SaveWasDown(false),
-					 finger2WasDown(false), finger2SaveWasDown(false) {inputPrivate = &Input;};
+CInput2::CInput2() : finger1Down(false), finger1SaveWasDown(false),
+					 finger2Down(false), finger2SaveWasDown(false),
+					 finger2WasDownAndFinger1IsDown(false) {inputPrivate = &Input;};
+
+void CInput2::resetInitial(int id) {
+	CTouch* touch = Input.getTouchByID(id);
+	if (touch != NULL) {
+		touch->x_initial = touch->x;
+		touch->y_initial = touch->y;
+	}
+};
 
 void CInput2::Update() {
 	Input.Update();
-	if (!finger1WasDown) {
-		CTouch* touch = Input.getTouchByID(0);
-		if (touch != NULL) {
-			touch->x_initial = touch->x;
-			touch->y_initial = touch->y;
-		}
+	int touchCount = Input.getTouchCount();
+	if (touchCount == 0) {
+		if (finger2WasDownAndFinger1IsDown)
+			finger2WasDownAndFinger1IsDown = false;
+		if (finger1Down)
+			finger1Down = false;
+		if (finger2Down)
+			finger2Down = false;
+		return;
 	}
-	finger1SaveWasDown = finger1WasDown;
-	finger1WasDown = Input.getTouchCount() > 0;
 
-	if (!finger2WasDown) {
-		CTouch* touch = Input.getTouchByID(1);
-		if (touch != NULL) {
-			touch->x_initial = touch->x;
-			touch->y_initial = touch->y;
-		}
+	if (!finger1Down) {
+		resetInitial(0);
 	}
-	finger2SaveWasDown = finger2WasDown;
-	finger2WasDown = Input.getTouchCount() > 1;
+	finger1SaveWasDown = finger1Down;
+	finger1Down = touchCount > 0;
+
+	if (finger2Down) {
+//		resetInitial(0);
+	} else {
+		resetInitial(1);
+	}
+	finger2SaveWasDown = finger2Down;
+	finger2Down = touchCount > 1;
+	if (finger1Down && !finger2Down && finger2SaveWasDown)
+		finger2WasDownAndFinger1IsDown = true;
 }
 
 bool CInput2::finger1IsDown() {
-	return finger1WasDown;
+	return finger1Down && !finger2WasDownAndFinger1IsDown;
 }
 bool CInput2::finger2IsDown() {
-	return finger2WasDown;
+	return finger2Down;
 }
 bool CInput2::finger1Continuing() {
 	return finger1SaveWasDown;
@@ -289,36 +305,3 @@ bool CInput2::finger1MovementDelta(int16 &dpixelsX, int16 &dpixelsY) {
 		return false;
 	}
 }
-//not working
-//bool CInput2::twoFingerZoom(float &zoom) {
-//	int16 pixelsX1, pixelsY1, pixelsX2, pixelsY2;
-//	if (twoPlusFingerMovedTo(pixelsX1, pixelsY1, pixelsX2, pixelsY2)) {
-//		float dx = float(pixelsX1 - pixelsX2);
-//		float dy = float(pixelsY1 - pixelsY2);
-//
-//		float maxDist = float(sqrt(IwGxGetScreenWidth()*IwGxGetScreenWidth()+
-//			IwGxGetScreenHeight()*IwGxGetScreenHeight()));
-//
-//		float dist = float(sqrt(dx*dx+dy*dy));
-//		zoom = dist/maxdist;
-//		?????
-//		int angle = int(atan2(dy,dx));
-//		if (abs(angle) < 5)
-//			return true;
-//	}
-//	return false;
-//}
-//bool CInput2::twoFingerRotateDegrees(float &angle) {
-//	int16 pixelsX1, pixelsY1, pixelsX2, pixelsY2;
-//	if (twoPlusFingerMovedTo(pixelsX1, pixelsY1, pixelsX2, pixelsY2)) {
-//		float dx = float(pixelsX1 - pixelsX2);
-//		float dy = float(pixelsY1 - pixelsY2);
-//
-//		double dist = sqrt(dx*dx+dy*dy);
-//		float angle = float(atan2(dy,dx));
-//		int iangle = int(angle);
-//		if (abs(iangle) >= 5)
-//			return true;
-//	}
-//	return false;
-//}

@@ -46,8 +46,8 @@ void HexMapTest::Init()
 {
 	zoom = 1.0f;
 	rotation = 0.0f;
-	translationX = 0;
-	translationY = 0;
+	screenTranslationX = 0;
+	screenTranslationY = 0;
 
 	// Initialise the input system
 	g_Input.Init();
@@ -249,6 +249,8 @@ void HexMapTest::SetZoom(float deltaZoom, int multiplier)
 	if (multiplier != 1 && deltaZoom < 1.0f/multiplier)
 		deltaZoom = 1.0f/multiplier;
 	zoom = zoom_initial * deltaZoom;
+	screenTranslationX = int16(screenTranslationX_initial*zoom/zoom_initial);
+	screenTranslationY = int16(screenTranslationY_initial*zoom/zoom_initial);
 	SetModelMatrix();
 }
 void HexMapTest::SetRotation(float deltaRotation)
@@ -275,8 +277,8 @@ void HexMapTest::SetTranslation()
 	int dx = (IW_FIXED_MUL(odx, cosTheta) - IW_FIXED_MUL(ody, sinTheta));
 	int dy = (IW_FIXED_MUL(odx, sinTheta) + IW_FIXED_MUL(ody, cosTheta));
 
-	translationX = translationX_initial + dx;
-	translationY = translationY_initial + dy;
+	screenTranslationX = screenTranslationX_initial + dx;
+	screenTranslationY = screenTranslationY_initial + dy;
 	SetModelMatrix();
 }
 void HexMapTest::SetModelMatrix() {
@@ -288,10 +290,10 @@ void HexMapTest::SetModelMatrix() {
 	//Zoom
 	s_ModelMatrix.Scale(IW_FIXED_FROM_FLOAT(zoom));
 	CIwVec3 vect = getWorldCoords(0, 0);
-	CIwVec3 vect2 = getWorldCoords(translationX, translationY);
+	CIwVec3 vect2 = getWorldCoords(screenTranslationX, screenTranslationY);
 
-	iwfixed dx = IW_FIXED_MUL(vect2.x-vect.x, IW_FIXED_FROM_FLOAT(zoom));
-	iwfixed dy = IW_FIXED_MUL(vect2.y-vect.y, IW_FIXED_FROM_FLOAT(zoom));
+	int32 dx = int32((vect2.x-vect.x) * zoom);
+	int32 dy = int32((vect2.y-vect.y) * zoom);
 
 	//s_ModelMatrix.t.x = -dx;
 	//s_ModelMatrix.t.y = -dy;
@@ -342,8 +344,8 @@ bool HexMapTest::Update()
 				CIwVec3 vectCenter = getWorldCoords(0, 0);
 				zoom_initial = zoom;
 				rotation_initial = rotation;
-				translationX_initial = translationX;
-				translationY_initial = translationY;
+				screenTranslationX_initial = screenTranslationX;
+				screenTranslationY_initial = screenTranslationY;
 				if (!g_Input.isMultiTouch()) {
 					if (g_Input.finger1MovedTo(sprite1_pos_x, sprite1_pos_y)) {
 						if (sprite1_pos_x > int(IwGxGetScreenWidth()) - SCREEN_MARGIN) {
@@ -380,7 +382,11 @@ bool HexMapTest::Update()
 			} else {
 				if (g_Input.finger1MovedTo(sprite1_pos_x, sprite1_pos_y)) {
 					if (g_Input.finger2MovedTo(sprite2_pos_x, sprite2_pos_y)) {
-						if (g_Input.finger2Continuing()) {
+						if (!g_Input.finger2Continuing()) {
+							screenTranslationX_initial = screenTranslationX;
+							screenTranslationY_initial = screenTranslationY;
+							g_Input.resetInitial(0);
+						} else {
 							int16 sprite1_pos_x_initial,sprite1_pos_y_initial,sprite2_pos_x_initial,sprite2_pos_y_initial;
 							g_Input.finger1Initial(sprite1_pos_x_initial,sprite1_pos_y_initial);
 							g_Input.finger2Initial(sprite2_pos_x_initial,sprite2_pos_y_initial);

@@ -50,10 +50,13 @@ public:
 
 class CInput2 {
 private:
-	bool finger1WasDown;
+	bool finger1Down;
 	bool finger1SaveWasDown;
-	bool finger2WasDown;
+	bool finger2Down;
 	bool finger2SaveWasDown;
+	//This variable is needed because it looks like the ID isn't the finger number that went down
+	//There are no gaps in the finger count, if 1 finger is down it will be ID 1, even if went down second
+	bool finger2WasDownAndFinger1IsDown;
 	int16 pixelLeeway;
 	CInput Input;
 //	int16 sprite1_pos_x_initial;
@@ -72,6 +75,7 @@ public:
 	bool finger1MovementDelta(int16 &dpixelsX, int16 &dpixelsY);
 	void finger2Initial(int16 &pixelsX, int16 &pixelsY);
 	bool finger2MovedTo(int16 &pixelsX2, int16 &pixelsY2);
+	void resetInitial(int id);
 //	bool twoFingerZoom(float &zoom);
 //	bool twoFingerRotateDegrees(float &angle);
 	bool Init(int16 vPixelLeeway=10) {setPixelLeeway(vPixelLeeway); return Input.Init();};							// Initialises the input system (returns true if pointer is supported)
